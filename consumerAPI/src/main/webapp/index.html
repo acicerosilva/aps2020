@@ -1,0 +1,157 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+        <title>Calculdora de Gastos</title>
+
+        <link rel="shortcut icon" type="image/x-icon" href="./Recursos/Imagens/Download.png">
+
+        <link rel="stylesheet" type="text/css" href="./Recursos/style/aps.css"/>
+    </head> 
+    <body>
+        <div class="logo">
+            <br>
+            <br>
+            Calculdora de Gastos de Eletronicos.
+        </div>
+        <div class="topo">
+            Explica&ccedil;&atilde;o da Utiliza&ccedil;&atilde;o!
+    <div class="fundo">
+        <div class="centro">
+            <div class="central">
+                <h1>		Introdução </h1>
+
+
+                <p class="intro">   Essa RestAPI aceita cadastro de usuarios e eletronicos e calcula os consumos 			</br>
+                                aproximados com base nas taxas da CPFL na região de Ribeirão Preto, desconsiderando		</br>
+                                outras taxas como outras bandeiras além da verde e Contribuição Custeio IP-CIP, taxas		</br>
+                                essas que são além do custo por kwh. </p>                       
+               
+
+                
+
+              
+                <h1> Operações: </h1>
+
+
+                <p>Todos os servicos poder ser consumidos a partir do seguinte contexto:  	</br>
+                    <font color="black">../consumerAPI/webresources/consumer/..</font>  	</br>
+                                                                                                </br>
+                    <font color="blue">  Cadastro de usuário:    </font>                        </br>
+                    <font color="black">../consumerAPI/webresources/consumer/cadastrar</font>   </br>
+                    POST                                                                        </br>
+                    <font color="black">submissão : </font>                                     </br> 
+                    {                                                                           </br>
+                        "name": "joao",                                                         </br>
+                        "email": "joao@gmail.com",                                              </br>
+                        "password": "pass3",                                                    </br>
+                    }                                                                           </br>
+                </p>
+                <p> <font color="blue">   Login de usuário:</font>                              </br>
+                    <font color="black">../consumerAPI/webresources/consumer/login</font>   </br>
+                    POST                                                                        </br>
+                    <font color="black">submissão : </font>                                     </br> 
+                    {                                                                           </br>                                                         </br>
+                        "email": "joao@gmail.com",                                              </br>
+                        "password": "pass3",                                                    </br>
+                    }                                                                           </br> 
+                    <font color="black">respota : </font>                                       </br>
+                    {                                                                           </br>
+                        "id": 7,                                                               </br>
+                        "name": "tese1",                                                        </br>                        
+                        "email": "teste@gmail.com",                                             </br>                
+                        "password": ""                                                          </br>            
+                    }                                                                           </br>       
+                </p>  </br>
+                <p> <font color="blue">Usa-se o id do usuário para cadastrar os eletronicos:</font></br>
+                    <font color="black">../consumerAPI/webresources/consumer/cadastrareletro</font>   </br>
+                    POST                                                                            </br>
+                    {                                                                                   </br>
+                         "name": "notebook", </br>
+                         "marca": "dell", </br>
+                         "potencia": 90, </br>
+                         "tempoUso": 8.00, </br>
+                         "pessoaIdFk":  2 </br>
+                    } </br>
+                </p>
+                <p><font color="blue">Busca os equipamentos pelo id do usuário com com os cálculos:</font></br>
+                    <font color="black">../consumerAPI/webresources/consumer/buscaeletro/{id}</font>   </br>
+                   GET                                                                           </br>
+                   respota :  </br>
+                   [ </br>
+                     { </br>
+                         "id": 1, </br>
+                         "name": "notebook", </br>
+                         "marca": "dell", </br>
+                         "potencia": 90, </br>
+                         "tempoUso": 8.00, </br>
+                         "gastoDiaWatts": 15.00, </br>
+                         "gastoMesWatts": 30.00, </br>
+                         "gastoDiaReais": 50.00, </br>
+                         "gastoMesReais": 100.00, </br>
+                         "pessoaIdFk":2 </br>
+                    } </br>
+                    { </br>
+                         "id": 2, </br>
+                         "name": "notebook", </br>
+                         "marca": "lenovo", </br>
+                         "potencia": 60, </br>
+                         "tempoUso": 8.00, </br>
+                         "gastoDiaWatts": 15.00, </br>
+                         "gastoMesWatts": 30.00, </br>
+                         "gastoDiaReais": 50.00, </br>
+                         "gastoMesReais": 100.00, </br>
+                         "pessoaIdFk":2 </br>
+                    } </br>
+                   ] </br>           
+                </p>
+                <p>
+                    <p><font color="blue">Editar as informações dos eletronicos:</font></br>
+                    <font color="black">../consumerAPI/webresources/consumer/editaeletro</font>   </br>
+                   PUT                                                                           </br>
+                   Submissão :  </br>
+                   [ </br>
+                     { </br>
+                         "id": 1, </br>
+                         "name": "notebook", </br>
+                         "marca": "dell", </br>
+                         "potencia": 90, </br>
+                         "tempoUso": 8.00, </br>
+                         "pessoaIdFk":2 </br>
+                    } </br> 
+                    
+                </p>
+                <p>
+                    <p><font color="blue">Trocar a senha do usuário:</font></br>
+                    <font color="black">../consumerAPI/webresources/consumer/trocasenha</font>   </br>
+                    PUT                                                                           </br>
+                    Submissão :  </br>
+                    { </br>
+                        "name": "joao", </br>
+                        "email": "joao@gmail.com", </br>
+                        "password": "pass4", </br>
+                        "passwordtwo" : "pass5" </br>
+                    } </br>
+                </p>
+                 <p><font color="blue">Deletar os equipamentos pelo id:</font></br>
+                    <font color="black">../consumerAPI/webresources/consumer/deletaeletro/{id}</font>   </br>
+                    DELETE</br>
+                    
+                 </p>
+                 <p><font color="blue">Deletar os usuário pelo id:</font></br>
+                    <font color="black">../consumerAPI/webresources/consumer/deletauser/{id}</font>   </br>
+                    DELETE</br>
+                    
+                 </p>
+                
+            </div>            
+        </div>
+    </div>
+    <div class="rodape">
+        Produzido como Atividade Pr&aacute;tica Supervisionada <br/>
+        Ci&ecirc;ncia da Computa&ccedil;&atilde;o | Unip 2020 - Ribeir&atilde;o Preto.
+    </div>   
+</body>
+
+</html>

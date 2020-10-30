@@ -1,0 +1,94 @@
+@charset "utf-8";
+/* CSS Document */
+
+	*{
+		font-family:arial;
+	}
+	body {
+		background-color:#D4D4D4;
+		background-image:url(../Imagens/texturaback.jpg);	
+	}
+	.logo{	
+		width:auto;
+		height:200px;
+		background-color:black;
+		color:white;
+		text-align:center;
+		background-image: url(../Imagens/deathstar.jpg);
+		text-align:center;
+		font-size:40px;
+ 	}
+	.topo{
+		width:auto;
+		height: auto;
+		background-color:#494949;
+		border-top:2px dotted #999;
+		border-bottom:2px dotted #999;
+		color: white;
+		text-align:center;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		font-size:18px;	
+	}
+	.centro{
+		background-color:#999;
+		width: 850px;
+		height: auto;
+		margin:0 auto;
+		padding: 0px;
+		text-align:center;
+		box-shadow: 2px 9px 1px #ffc;
+   		-webkit-box-shadow: 2px 1px 2px ;
+  		-moz-box-shadow: 2px 1px 2px ;	
+	}
+	.central{
+		background-color:#999;
+		width: 96%;
+		height: auto;
+		margin:0 auto;
+		margin-left: 0px;
+		margin-bottom: 5px; 
+		text-align: center;
+		padding: 10px;
+		box-shadow: -2px 2px 2px #ffc;
+   		-webkit-box-shadow: -2px 2px 2px ;
+  		-moz-box-shadow: -2px 2px 2px ;	
+	}
+	div.rodape {
+		text-align:center;	
+		bottom:0px;
+		width:100%;
+		background-color:#494949;
+		height: auto;
+		border-top:2px dotted #999;
+		border-bottom:2px dotted #999;
+		margin-top: 15px;
+		color:#D6D6D6;		
+	}
+	p{
+		text-align:left;
+		margin-left: 100px;	
+	}				
+	a:link    {
+		color:black; 
+		background-color:transparent; 
+		text-decoration:none
+	}
+	a:visited {
+		color:black; 
+		background-color:transparent; 
+		text-decoration:none
+		}
+	a:hover   {
+		color:white; 
+		background-color:transparent; 
+		text-decoration:none
+		}
+	a:active  {
+		color:black; 
+		background-color:transparent; 
+		text-decoration:none
+		}
+	
+
+	
