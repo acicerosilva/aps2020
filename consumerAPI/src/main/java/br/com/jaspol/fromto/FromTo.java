@@ -43,6 +43,7 @@ public class FromTo {
             Eletro eletro = new Eletro();
             eletro.setId(elet.getId());
             eletro.setName(elet.getName());
+            eletro.setMarca(elet.getMarca());
             eletro.setPotencia(elet.getPotencia().intValue());
             eletro.setTempoUso(new Double(elet.getTempoUso().toString()));
             eletro.setGastoDiaWatts(new Double(elet.getGastoDiaWatts().toString()));

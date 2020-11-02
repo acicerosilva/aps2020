@@ -66,7 +66,6 @@ public class ConsumoService {
             p = this.dao.buscaPessoa(user);
             if (p == null) {
                 this.dePara.newUser(user, this.dao);
-                this.dao.merge(p);
                 this.dao.fechaConnec();
                 return"Usuario cadastrado com sucesso!";
             } else {
