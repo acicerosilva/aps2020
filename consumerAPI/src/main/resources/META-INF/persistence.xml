@@ -8,12 +8,12 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="true"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/CONSUMO-WEBSERVICE"/>
-      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-54-235-192-146.compute-1.amazonaws.com:5432/d33of7td8mnauv"/>
+      <property name="javax.persistence.jdbc.user" value="ylpsuadkbpsxfp"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="postgres"/>
+      <property name="javax.persistence.jdbc.password" value="c8830aeb34f2f056254538f18e25ed123f3db2ba86fb069f089463d15f3042f3"/>
     </properties>
   </persistence-unit>
 </persistence>
