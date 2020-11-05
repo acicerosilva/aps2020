@@ -25,9 +25,9 @@ import javax.persistence.TypedQuery;
  * @author compliancedev03
  */
 public class GenericDao {
-    public static EntityManager em = null;
-    private static EntityManagerFactory emf = null;
-    private static EntityTransaction tx = null;
+    private EntityManager em = null;
+    private EntityManagerFactory emf = null;
+    private EntityTransaction tx = null;
 
     public void openConnec() {
 
@@ -37,8 +37,10 @@ public class GenericDao {
     }
 
     public void fechaConnec() {
-        if (this.em != null) {
+        if (this.em != null ) {
+            this.em.clear();
             this.em.close();
+            this.emf.close();
         }
     }
 

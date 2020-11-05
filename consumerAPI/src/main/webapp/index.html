@@ -36,25 +36,25 @@
 
 
                 <p>Todos os servicos poder ser consumidos a partir do seguinte contexto:  	</br>
-                    <font color="black">../consumerAPI/webresources/consumer/..</font>  	</br>
+                    <font color="black">../webresources/consumer/..</font>  	</br>
                                                                                                 </br>
                     <font color="blue">  Cadastro de usuário:    </font>                        </br>
-                    <font color="black">../consumerAPI/webresources/consumer/cadastrar</font>   </br>
+                    <font color="black">../webresources/consumer/cadastrar</font>   </br>
                     POST                                                                        </br>
                     <font color="black">submissão : </font>                                     </br> 
                     {                                                                           </br>
                         "name": "joao",                                                         </br>
                         "email": "joao@gmail.com",                                              </br>
-                        "password": "pass3",                                                    </br>
+                        "password": "pass3"                                                    </br>
                     }                                                                           </br>
                 </p>
                 <p> <font color="blue">   Login de usuário:</font>                              </br>
-                    <font color="black">../consumerAPI/webresources/consumer/login</font>   </br>
+                    <font color="black">../webresources/consumer/login</font>   </br>
                     POST                                                                        </br>
                     <font color="black">submissão : </font>                                     </br> 
                     {                                                                           </br>                                                         </br>
                         "email": "joao@gmail.com",                                              </br>
-                        "password": "pass3",                                                    </br>
+                        "password": "pass3"                                                    </br>
                     }                                                                           </br> 
                     <font color="black">respota : </font>                                       </br>
                     {                                                                           </br>
@@ -65,7 +65,7 @@
                     }                                                                           </br>       
                 </p>  </br>
                 <p> <font color="blue">Usa-se o id do usuário para cadastrar os eletronicos:</font></br>
-                    <font color="black">../consumerAPI/webresources/consumer/cadastrareletro</font>   </br>
+                    <font color="black">../webresources/consumer/cadastrareletro</font>   </br>
                     POST                                                                            </br>
                     {                                                                                   </br>
                          "name": "notebook", </br>
@@ -76,7 +76,7 @@
                     } </br>
                 </p>
                 <p><font color="blue">Busca os equipamentos pelo id do usuário com com os cálculos:</font></br>
-                    <font color="black">../consumerAPI/webresources/consumer/buscaeletro/{id}</font>   </br>
+                    <font color="black">../webresources/consumer/buscaeletro/{id}</font>   </br>
                    GET                                                                           </br>
                    respota :  </br>
                    [ </br>
@@ -108,7 +108,7 @@
                 </p>
                 <p>
                     <p><font color="blue">Editar as informações dos eletronicos:</font></br>
-                    <font color="black">../consumerAPI/webresources/consumer/editaeletro</font>   </br>
+                    <font color="black">../webresources/consumer/editaeletro</font>   </br>
                    PUT                                                                           </br>
                    Submissão :  </br>
                    [ </br>
@@ -124,7 +124,7 @@
                 </p>
                 <p>
                     <p><font color="blue">Trocar a senha do usuário:</font></br>
-                    <font color="black">../consumerAPI/webresources/consumer/trocasenha</font>   </br>
+                    <font color="black">../webresources/consumer/trocasenha</font>   </br>
                     PUT                                                                           </br>
                     Submissão :  </br>
                     { </br>
@@ -135,12 +135,12 @@
                     } </br>
                 </p>
                  <p><font color="blue">Deletar os equipamentos pelo id:</font></br>
-                    <font color="black">../consumerAPI/webresources/consumer/deletaeletro/{id}</font>   </br>
+                    <font color="black">../webresources/consumer/deletaeletro/{id}</font>   </br>
                     DELETE</br>
                     
                  </p>
                  <p><font color="blue">Deletar os usuário pelo id:</font></br>
-                    <font color="black">../consumerAPI/webresources/consumer/deletauser/{id}</font>   </br>
+                    <font color="black">../webresources/consumer/deletauser/{id}</font>   </br>
                     DELETE</br>
                     
                  </p>

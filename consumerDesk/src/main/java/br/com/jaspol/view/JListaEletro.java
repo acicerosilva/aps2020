@@ -8,9 +8,7 @@ package br.com.jaspol.view;
 import br.com.jaspol.dao.CalculadoraDao;
 import br.com.jaspol.model.EditaEletro;
 import br.com.jaspol.model.Eletro;
-import br.com.jaspol.model.ListEletro;
 import br.com.jaspol.model.LoginResponse;
-import br.com.jaspol.model.NewEletro;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
@@ -43,14 +41,20 @@ public class JListaEletro extends javax.swing.JFrame {
     
     private void preencherEletros(String id){
         DefaultListModel m = new DefaultListModel();
-        elet = new Gson().fromJson(this.dao.getEletro(id), new TypeToken<ArrayList<Eletro>>() {
-        }.getType());
-        if (!elet.isEmpty()) {
-            for (Eletro eletro : elet) {
-                m.addElement(eletro.getName());
+        String retorno = this.dao.getEletro(id);
+        if (retorno.contains("potencia")) {
+            elet = new Gson().fromJson(this.dao.getEletro(id), new TypeToken<ArrayList<Eletro>>() {
+            }.getType());
+            if (!elet.isEmpty()) {
+                for (Eletro eletro : elet) {
+                    m.addElement(eletro.getName());
+                }
+                jListEletro.setModel(m);
+            } else {
+                jListEletro.setModel(m);
             }
-            jListEletro.setModel(m);
         }else{
+            JOptionPane.showMessageDialog(null, retorno);
             jListEletro.setModel(m);
         }
     }
@@ -87,6 +91,8 @@ public class JListaEletro extends javax.swing.JFrame {
         jButtonEditar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jButtonExcluirUser = new javax.swing.JButton();
+        jButtonCep = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,55 +180,75 @@ public class JListaEletro extends javax.swing.JFrame {
             }
         });
 
+        jButtonCep.setText("CEP");
+        jButtonCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCepActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("BONUS: Informações Sobre seu CEP:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jButtonCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
-                .addGap(33, 33, 33)
+                .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextName, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                            .addComponent(jTextMarca)
-                            .addComponent(jTextPotencia)
-                            .addComponent(jTextTempo))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jGastoMesReais, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jGastoMesKw, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jGastoDiaReais, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jGastoDiaKW, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(143, 143, 143))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButtonExcluir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(jButtonEditar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(43, 43, 43)
+                                .addGap(41, 41, 41)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jButtonCep, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addComponent(jButtonCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonExcluirUser, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 190, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextName, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                    .addComponent(jTextMarca)
+                                    .addComponent(jTextPotencia)
+                                    .addComponent(jTextTempo))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(56, 56, 56)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel8))
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jGastoMesReais, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jGastoMesKw, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jGastoDiaReais, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jGastoDiaKW, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addGap(143, 143, 143))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                                    .addComponent(jButtonEditar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonExcluirUser, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 127, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,11 +305,14 @@ public class JListaEletro extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButtonExcluir)
                     .addComponent(jButtonSair))
-                .addGap(47, 47, 47)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCadastrar)
                     .addComponent(jButtonEditar)
-                    .addComponent(jButtonExcluirUser))
+                    .addComponent(jButtonExcluirUser)
+                    .addComponent(jButtonCep))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
@@ -377,6 +406,12 @@ public class JListaEletro extends javax.swing.JFrame {
          }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
+    private void jButtonCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCepActionPerformed
+        JCep cep = new JCep(this.dao);
+        cep.setVisible(true);
+        cep.setTitle("Informações sobre seu CEP.");
+    }//GEN-LAST:event_jButtonCepActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -415,6 +450,7 @@ public class JListaEletro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCadastrar;
+    private javax.swing.JButton jButtonCep;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonExcluirUser;
@@ -431,6 +467,7 @@ public class JListaEletro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jListEletro;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextMarca;

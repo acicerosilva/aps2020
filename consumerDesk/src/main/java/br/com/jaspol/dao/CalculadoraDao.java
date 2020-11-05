@@ -8,14 +8,9 @@ package br.com.jaspol.dao;
 import br.com.jaspol.model.EditaEletro;
 import br.com.jaspol.model.Eletro;
 import br.com.jaspol.model.Login;
-import br.com.jaspol.model.LoginResponse;
-import br.com.jaspol.model.NewEletro;
 import br.com.jaspol.model.NewPass;
 import br.com.jaspol.model.NewUser;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -44,7 +39,7 @@ public class CalculadoraDao {
     //
     public String CadastraUser(NewUser u){
         try {
-            HttpPost requisicao = new HttpPost("http://localhost:33919/consumerAPI/webresources/consumer/cadastrar");
+            HttpPost requisicao = new HttpPost("https://wsrestrletricocossumer.herokuapp.com/webresources/consumer/cadastrar");
             requisicao.addHeader("Content-Type", "application/json");
             
             //Converter o objeto em JSON
@@ -64,7 +59,7 @@ public class CalculadoraDao {
     //
     public String login(Login u){
         try {
-            HttpPost requisicao = new HttpPost("http://localhost:33919/consumerAPI/webresources/consumer/login");
+            HttpPost requisicao = new HttpPost("https://wsrestrletricocossumer.herokuapp.com/webresources/consumer/login");
             requisicao.addHeader("Content-Type", "application/json");
             
             //Converter o objeto em JSON
@@ -84,7 +79,7 @@ public class CalculadoraDao {
     //
     public String newEletro(Eletro e){
         try {
-            HttpPost requisicao = new HttpPost("http://localhost:33919/consumerAPI/webresources/consumer/cadastrareletro");
+            HttpPost requisicao = new HttpPost("https://wsrestrletricocossumer.herokuapp.com/webresources/consumer/cadastrareletro");
             requisicao.addHeader("Content-Type", "application/json");
             
             //Converter o objeto em JSON
@@ -104,7 +99,7 @@ public class CalculadoraDao {
     //
     public String getEletro(final String RECURSO){
         try {
-            HttpGet requisicao = new HttpGet("http://localhost:33919/consumerAPI/webresources/consumer/buscaeletro/"+RECURSO);
+            HttpGet requisicao = new HttpGet("https://wsrestrletricocossumer.herokuapp.com/webresources/consumer/buscaeletro/"+RECURSO);
             requisicao.addHeader("Content-Type", "application/json");
            
             HttpResponse resposta = http.execute(requisicao);
@@ -120,7 +115,7 @@ public class CalculadoraDao {
     //
     public String editaEletro(EditaEletro el){
         try {
-            HttpPut requisicao = new HttpPut("http://localhost:33919/consumerAPI/webresources/consumer/editaeletro");
+            HttpPut requisicao = new HttpPut("https://wsrestrletricocossumer.herokuapp.com/webresources/consumer/editaeletro");
             requisicao.addHeader("Content-Type", "application/json");
             
             //Converter o objeto Aluno em JSON
@@ -140,7 +135,7 @@ public class CalculadoraDao {
     //
     public String editaUser(NewPass p){
         try {
-            HttpPut requisicao = new HttpPut("http://localhost:33919/consumerAPI/webresources/consumer/trocasenha");
+            HttpPut requisicao = new HttpPut("https://wsrestrletricocossumer.herokuapp.com/webresources/consumer/trocasenha");
             requisicao.addHeader("Content-Type", "application/json");
             
             //Converter o objeto Aluno em JSON
@@ -160,7 +155,7 @@ public class CalculadoraDao {
     //
     public String deleteEletro(final String RECURSO){
         try {
-            HttpDelete requisicao = new HttpDelete("http://localhost:33919/consumerAPI/webresources/consumer/deletaeletro/"+RECURSO);
+            HttpDelete requisicao = new HttpDelete("https://wsrestrletricocossumer.herokuapp.com/webresources/consumer/deletaeletro/"+RECURSO);
             requisicao.addHeader("Content-Type", "application/json");
             
             HttpResponse resposta = http.execute(requisicao);
@@ -176,7 +171,7 @@ public class CalculadoraDao {
     //
     public String deleteUser(final String RECURSO){
         try {
-            HttpDelete requisicao = new HttpDelete("http://localhost:33919/consumerAPI/webresources/consumer/deletauser/"+RECURSO);
+            HttpDelete requisicao = new HttpDelete("https://wsrestrletricocossumer.herokuapp.com/webresources/consumer/deletauser/"+RECURSO);
             requisicao.addHeader("Content-Type", "application/json");
             
             HttpResponse resposta = http.execute(requisicao);
@@ -187,5 +182,16 @@ public class CalculadoraDao {
         }
     }       
 
-    
+     public String getCep(final String RECURSO){
+        try {
+            HttpGet requisicao = new HttpGet("https://viacep.com.br/ws/"+RECURSO+"/json/");
+            requisicao.addHeader("Content-Type", "application/json");
+           
+            HttpResponse resposta = http.execute(requisicao);
+            return EntityUtils.toString(resposta.getEntity());
+        } catch (Exception e) {
+            System.err.println("ERRO: " + e.getMessage());
+            return null;
+        }
+    }   
 }
