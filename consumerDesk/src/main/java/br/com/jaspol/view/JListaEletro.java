@@ -365,7 +365,7 @@ public class JListaEletro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonExcluirUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirUserActionPerformed
-         if(elet.isEmpty()){
+         if(!(jListEletro.getModel().getSize() > 0)){
              JOptionPane.showMessageDialog(null,this.dao.deleteUser(this.userResponse.getId().toString()));
          }else{
              JOptionPane.showMessageDialog(null,"Delete os Eletronicos antes de excluir o usuário!" );
