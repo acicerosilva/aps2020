@@ -23,6 +23,8 @@ public class JTrocarSenha extends javax.swing.JFrame {
         this.dao = dao;
         initComponents();
         this.setTitle("Trocar Senha");
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
 

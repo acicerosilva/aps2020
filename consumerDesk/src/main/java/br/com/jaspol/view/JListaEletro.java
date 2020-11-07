@@ -37,6 +37,9 @@ public class JListaEletro extends javax.swing.JFrame {
         this.setTitle("Eletronicos");
         this.userResponse = userResponse;
         preencherEletros(this.userResponse.getId().toString());
+        this.setVisible(true);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
     
     private void preencherEletros(String id){
@@ -330,7 +333,19 @@ public class JListaEletro extends javax.swing.JFrame {
             jTextName.setText(eletroView.getName());
             jTextMarca.setText(eletroView.getMarca());
             jTextPotencia.setText(eletroView.getPotencia().toString());
-            jTextTempo.setText(eletroView.getTempoUso().toString());
+            int beginIdndex = eletroView.getTempoUso().toString().indexOf(".");
+            int multiplica = Integer.parseInt(eletroView.getTempoUso().toString().substring(beginIdndex+1));
+            if(multiplica == 0){
+                jTextTempo.setText(eletroView.getTempoUso().toString().substring(0, beginIdndex).concat(":").concat("00"));
+            }else{
+                Double minuto;
+                if (multiplica > 9) {
+                    minuto = (new Double(multiplica) * 0.6);
+                } else {
+                    minuto = (new Double(multiplica) * 6);
+                }
+                jTextTempo.setText(eletroView.getTempoUso().toString().substring(0, beginIdndex).concat(":").concat(minuto.toString().format("%.0f", minuto)));
+            }
             jGastoDiaKW.setText(eletroView.getGastoDiaWatts().toString());
             jGastoDiaReais.setText(eletroView.getGastoDiaReais().toString());
             jGastoMesKw.setText(eletroView.getGastoMesWatts().toString());
@@ -373,37 +388,86 @@ public class JListaEletro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExcluirUserActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-       if(!jTextName.getText().isEmpty() && !jTextMarca.getText().isEmpty() 
-                && !jTextPotencia.getText().isEmpty() && !jTextTempo.getText().isEmpty()){
-            Eletro eletronico = this.elet.get(idx);
-            EditaEletro editaEletro = new EditaEletro();
-            editaEletro.setId(eletronico.getId());
-            editaEletro.setName(jTextName.getText());
-            editaEletro.setMarca(jTextMarca.getText());
-            editaEletro.setPotencia(Integer.parseInt(jTextPotencia.getText()));
-            editaEletro.setTempoUso(Double.parseDouble(jTextTempo.getText()));
-            editaEletro.setPessoaIdFk(this.userResponse.getId());
-            JOptionPane.showMessageDialog(null,this.dao.editaEletro(editaEletro));
-            this.preencherEletros(this.userResponse.getId().toString());
-        }else{
+        if (!jTextName.getText().isEmpty() && !jTextMarca.getText().isEmpty()
+                && !jTextPotencia.getText().isEmpty() && !jTextTempo.getText().isEmpty()) {
+            if (!jTextPotencia.getText().toLowerCase().contains("^[a-Z]")) {
+                if (!(jTextPotencia.getText().contains(","))
+                        && !(jTextPotencia.getText().contains("."))) {
+                    if (!jTextTempo.getText().contains("^[a-Z]")) {
+                        if (!(jTextTempo.getText().length() > 5)) {
+                            Eletro eletronico = this.elet.get(idx);
+                            EditaEletro editaEletro = new EditaEletro();
+                            editaEletro.setId(eletronico.getId());
+                            editaEletro.setName(jTextName.getText());
+                            editaEletro.setMarca(jTextMarca.getText());
+                            editaEletro.setPotencia(Integer.parseInt(jTextPotencia.getText()));
+                            if (jTextTempo.getText().contains(".")) {
+                                editaEletro.setTempoUso(Double.parseDouble(jTextTempo.getText()));
+                            } else if (jTextTempo.getText().contains(":")) {
+                                int beginIdndex = jTextTempo.getText().indexOf(":");
+                                Double divide = Double.parseDouble(jTextTempo.getText().substring(beginIdndex + 1));
+                                Double minuto = (divide / 60);
+                                Double tempoUso = (Double.parseDouble(jTextTempo.getText().substring(0, beginIdndex)) + minuto);
+                                editaEletro.setTempoUso(tempoUso);
+                            } else {
+                                editaEletro.setTempoUso(Double.parseDouble(jTextTempo.getText()));
+                            }
+                            editaEletro.setPessoaIdFk(this.userResponse.getId());
+                            JOptionPane.showMessageDialog(null, this.dao.editaEletro(editaEletro));
+                            this.preencherEletros(this.userResponse.getId().toString());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Formato inválido para horas!");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Campo de tempo de uso não aceita letras!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Campo de potência não aceita letras ou simbolos!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Campo de potência não aceita letras ou simbolos!");
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Nenhum Eletronico Selecionado!");
         }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-         if(!jTextName.getText().isEmpty() && !jTextMarca.getText().isEmpty() 
-                && !jTextPotencia.getText().isEmpty() && !jTextTempo.getText().isEmpty()){
-             Eletro newEletro = new Eletro();
-             newEletro.setName(jTextName.getText());
-             newEletro.setMarca(jTextMarca.getText());
-             newEletro.setPotencia(Integer.parseInt(jTextPotencia.getText()));
-             newEletro.setTempoUso(Double.parseDouble(jTextTempo.getText()));
-             newEletro.setPessoaIdFk(this.userResponse.getId());
-             JOptionPane.showMessageDialog(null,this.dao.newEletro(newEletro));             
-             this.preencherEletros(this.userResponse.getId().toString());   
-         }else{
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos!"); 
-         }
+        if (!jTextName.getText().isEmpty() && !jTextMarca.getText().isEmpty()
+                && !jTextPotencia.getText().isEmpty() && !jTextTempo.getText().isEmpty()) {
+            if (!(jTextPotencia.getText().contains("^[a-Z]")) && !(jTextPotencia.getText().contains(",")) && !(jTextPotencia.getText().contains("."))) {
+                if (!jTextTempo.getText().contains("^[a-Z]")) {
+                    if (!(jTextTempo.getText().length() > 5)) {
+                        Eletro newEletro = new Eletro();
+                        newEletro.setName(jTextName.getText());
+                        newEletro.setMarca(jTextMarca.getText());
+                        newEletro.setPotencia(Integer.parseInt(jTextPotencia.getText()));
+                        if (jTextTempo.getText().contains(".")) {
+                            newEletro.setTempoUso(Double.parseDouble(jTextTempo.getText()));
+                        } else if (jTextTempo.getText().contains(":")) {
+                            int beginIdndex = jTextTempo.getText().indexOf(":");
+                            Double divide = Double.parseDouble(jTextTempo.getText().substring(beginIdndex+1,beginIdndex+3));
+                            Double minuto = (divide / 60);
+                            Double tempoUso =(Double.parseDouble(jTextTempo.getText().substring(0, beginIdndex))+minuto);
+                            newEletro.setTempoUso(tempoUso);
+                        } else {
+                            newEletro.setTempoUso(Double.parseDouble(jTextTempo.getText()));
+                        }
+                        newEletro.setPessoaIdFk(this.userResponse.getId());
+                        JOptionPane.showMessageDialog(null, this.dao.newEletro(newEletro));
+                        this.preencherEletros(this.userResponse.getId().toString());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Formato inválido para horas!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Campo de tempo de uso não aceita letras!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Campo de potência não aceita letras ou simbolos!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+        }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jButtonCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCepActionPerformed

@@ -6,7 +6,6 @@
 package br.com.jaspol.view;
 
 import br.com.jaspol.dao.CalculadoraDao;
-import br.com.jaspol.model.NewPass;
 import br.com.jaspol.model.NewUser;
 import javax.swing.JOptionPane;
 
@@ -24,6 +23,8 @@ public class JCadastrar extends javax.swing.JFrame {
         this.dao = dao;
         initComponents();
         this.setTitle("Casdastrar Usuario");
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
 

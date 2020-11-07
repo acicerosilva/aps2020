@@ -25,6 +25,8 @@ public class Jlogin extends javax.swing.JFrame {
         initComponents();
         this.dao = new CalculadoraDao();
         this.setTitle("Login");
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -205,7 +207,7 @@ public class Jlogin extends javax.swing.JFrame {
             }else{
                 LoginResponse userResponse = new Gson().fromJson(retorno, LoginResponse.class);
                 JListaEletro eletro = new JListaEletro(this.dao,userResponse);
-                eletro.setVisible(true);                
+              
             }            
         }else{
             JOptionPane.showMessageDialog(null,"Preencha os campos!");

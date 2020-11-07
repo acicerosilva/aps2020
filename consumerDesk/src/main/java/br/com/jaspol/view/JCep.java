@@ -23,6 +23,8 @@ public class JCep extends javax.swing.JFrame {
     public JCep(CalculadoraDao dao) {
         initComponents();
         this.dao = dao;
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**
